@@ -1,0 +1,64 @@
+version: "3"
+services:
+  database:
+    image: postgis/postgis:13-master
+    # Required when running on platform other than amd64, like Apple M1/M2:
+    # platform: linux/amd64
+    volumes:
+      - ./directus/data/database:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER_FILE: /run/secrets/postgres_user
+      POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+      POSTGRES_DB: "${POSTGRES_DB}"
+    secrets:
+      - postgres_user
+      - postgres_password
+
+  directus:
+    image: directus/directus:10.8.2
+    ports:
+      - "8055:8055"
+    volumes:
+      - ./directus/uploads:/directus/uploads
+      - ./directus/extensions:/directus/extensions
+    depends_on:
+      - database
+    environment:
+      KEY_FILE: /run/secrets/directus_key
+      SECRET_FILE: /run/secrets/directus_secret
+
+      ADMIN_EMAIL_FILE: /run/secrets/directus_admin_email
+      ADMIN_PASSWORD_FILE: /run/secrets/directus_admin_password
+
+      DB_CLIENT: "pg"
+      DB_HOST: "database"
+      DB_PORT: "5432"
+      DB_DATABASE: "${POSTGRES_DB}"
+      DB_USER_FILE: /run/secrets/postgres_user
+      DB_PASSWORD_FILE: /run/secrets/postgres_password
+    secrets:
+      - postgres_user
+      - postgres_password
+      - directus_key
+      - directus_secret
+      - directus_admin_email
+      - directus_admin_password
+
+      # PUBLIC_URL: 'https://directus.example.com'
+
+secrets:
+  postgres_user:
+    file: ./docker_secrets/postgres_user.txt
+  postgres_password:
+    file: ./docker_secrets/postgres_password.txt
+
+  directus_key:
+    file: ./docker_secrets/directus_key.txt
+  directus_secret:
+    file: ./docker_secrets/directus_secret.txt
+  directus_admin_email:
+    file: ./docker_secrets/directus_admin_email.txt
+  directus_admin_password:
+    file: ./docker_secrets/directus_admin_password.txt
