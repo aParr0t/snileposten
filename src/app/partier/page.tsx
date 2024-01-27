@@ -1,8 +1,9 @@
 import Image from "next/image";
 
 import Partyleader from "/public/static/images/dummy images/partyleader.png";
+import { getParties } from "@/lib/directus";
 
-export default function Parties() {
+export default async function Parties() {
   const party = "Arbeiderpartiet";
   const short = "AP";
   const leader = "Erik Viken";

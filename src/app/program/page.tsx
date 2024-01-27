@@ -5,7 +5,6 @@ export default async function Program() {
   const program = fetchedProgram.slice(1, fetchedProgram.length - 1);
   const start = formatDate(fetchedProgram[0].time);
   const end = formatDate(fetchedProgram[fetchedProgram.length - 1].time);
-  console.log(start);
 
   return (
     <div className="absolute h-full w-full overflow-y-hidden">
