@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { getImage, getParty, getPartyNames } from "@/lib/directus";
+import { getParty, getPartyNames } from "@/lib/directus";
 
 export default async function Parties({
   params,
@@ -30,7 +30,7 @@ export default async function Parties({
           <p>{description}</p>
         </div>
       </div>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center pt-20">
         <Image
           src={logo}
           alt="partilogo"
