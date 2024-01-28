@@ -1,7 +1,6 @@
 import {
   Sheet,
   SheetContent,
-  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
@@ -9,29 +8,51 @@ import {
 import { IoMenu } from "react-icons/io5";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-import { getPartyNames } from "@/lib/directus";
+import { getArticles, getPartyNames } from "@/lib/directus";
+import { formatDateddmmyy } from "@/lib/date";
+import Image from "next/image";
 
 export default async function Navbar() {
   const parties = await getPartyNames();
-  // const articles
+  const articles = await getArticles();
 
   const itemClass =
     "py-4 px-4 inline transition-colors font-medium text-lg text-secondary hover:bg-secondary hover:text-primary";
+  const bigArticle = articles[0];
   return (
     <nav className="bg-primary w-full px-2 flex flex-row items-center gap-8">
       <Sheet>
         <SheetTrigger className="text-secondary">
           <IoMenu size={36} />
         </SheetTrigger>
-        <SheetContent side="left" className="bg-secondary-light text-tertiary">
+        <SheetContent side="left" className="bg-secondary-light">
           <SheetHeader>
-            <SheetTitle className="text-tertiary text-3xl">
+            <SheetTitle className="text-tertiary text-3xl py-6 text-center">
               Siste nytt
             </SheetTitle>
-            <SheetDescription>
-              This action cannot be undone. This will permanently delete your
-              account and remove your data from our servers.
-            </SheetDescription>
+            <div>
+              {articles.slice(1).map((article) => (
+                <Link key={article.id} href={`/artikler/${article.title}`}>
+                  <div className="border-t-2 border-tertiary py-4">
+                    <p className="">{formatDateddmmyy(article.date)}</p>
+                    <p className="text-lg">{article.title}</p>
+                  </div>
+                </Link>
+              ))}
+              <Link href={`/artikler/${bigArticle.title}`}>
+                <div className="border-t-2 border-tertiary">
+                  <p className="">{formatDateddmmyy(bigArticle.date)}</p>
+                  <p className="text-lg">{bigArticle.title}</p>
+                  <Image
+                    src={bigArticle.thumbnail}
+                    alt="artikkel"
+                    width={300}
+                    height={300}
+                    className="w-full h-auto"
+                  />
+                </div>
+              </Link>
+            </div>
           </SheetHeader>
         </SheetContent>
       </Sheet>
