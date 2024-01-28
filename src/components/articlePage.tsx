@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { articleReducer } from "@/lib/directus";
+import { formatDateddmmyy } from "@/lib/date";
 import Link from "next/link";
 
 const categories = [
@@ -69,7 +70,7 @@ export default function ArticlePage({
           <div>
             <div className="pl-2 mb-6">
               <span className="block font-semibold text-sm capitalize">
-                {formatDate(bigArticle.date)}
+                {formatDateddmmyy(bigArticle.date)}
               </span>
               <span className="font-semibold">{bigArticle.categories}</span>
               <h2 className="text-4xl font-bold">{bigArticle.title}</h2>
@@ -93,7 +94,7 @@ export default function ArticlePage({
                 >
                   <div className="flex-grow basis-0 min-w-0">
                     <span className="block font-semibold text-sm capitalize">
-                      {formatDate(article.date)}
+                      {formatDateddmmyy(article.date)}
                     </span>
                     <h2 className="font-bold text-xl">{article.title}</h2>
                     <span className="font-semibold text-sm capitalize">
@@ -115,14 +116,4 @@ export default function ArticlePage({
       </div>
     </div>
   );
-}
-
-function formatDate(date: string) {
-  const dateObj = new Date(date);
-  const formatedDate = dateObj.toLocaleDateString("nb-NO", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-  return formatedDate;
 }
