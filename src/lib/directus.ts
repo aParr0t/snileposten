@@ -1,7 +1,6 @@
-import Articles from "@/app/artikler/page";
-import { readItems, createDirectus, rest, readFile } from "@directus/sdk";
+import { readItems, createDirectus, rest } from "@directus/sdk";
 
-const baseUrl = "http://localhost:8055";
+const baseUrl = process.env.API_URL || "http://localhost:8055";
 const directus = createDirectus(baseUrl).with(rest());
 
 export default directus;
