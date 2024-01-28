@@ -11,9 +11,6 @@ export default async function Parties({
   const { quote, leader, description, name, color, portrait, logo } =
     await getParty(partyName);
 
-  const portraitImage = await getImage(portrait);
-  const partyImage = await getImage(logo);
-
   return (
     <div className="flex flex-row mx-auto px-8 gap-6">
       <div
@@ -21,7 +18,7 @@ export default async function Parties({
         style={{ backgroundColor: color }}
       >
         <Image
-          src={portraitImage}
+          src={portrait}
           alt="partileder"
           width={300}
           height={300}
@@ -35,7 +32,7 @@ export default async function Parties({
       </div>
       <div className="flex flex-col items-center">
         <Image
-          src={partyImage}
+          src={logo}
           alt="partilogo"
           width={200}
           height={100}

@@ -13,14 +13,17 @@ import { getPartyNames } from "@/lib/directus";
 
 export default async function Navbar() {
   const parties = await getPartyNames();
+  // const articles
 
+  const itemClass =
+    "py-4 px-4 inline transition-colors font-medium text-lg text-secondary hover:bg-secondary hover:text-primary";
   return (
     <nav className="bg-primary w-full px-2 flex flex-row items-center gap-8">
       <Sheet>
         <SheetTrigger className="text-secondary">
           <IoMenu size={36} />
         </SheetTrigger>
-        <SheetContent side="left" className="bg-secondary text-tertiary">
+        <SheetContent side="left" className="bg-secondary-light text-tertiary">
           <SheetHeader>
             <SheetTitle className="text-tertiary text-3xl">
               Siste nytt
@@ -34,10 +37,7 @@ export default async function Navbar() {
       </Sheet>
       <ul className="flex flex-row">
         <li className="flex">
-          <Link
-            href="/program"
-            className="py-4 px-4 inline transition-colors font-medium text-lg text-secondary hover:bg-secondary hover:text-primary"
-          >
+          <Link href="/program" className={itemClass}>
             Program
           </Link>
         </li>
@@ -63,6 +63,16 @@ export default async function Navbar() {
               </li>
             ))}
           </ul>
+        </li>
+        <li className="flex">
+          <Link href="/artikler" className={itemClass}>
+            Artikler
+          </Link>
+        </li>
+        <li className="flex">
+          <Link href="/om-oss" className={itemClass}>
+            Om oss
+          </Link>
         </li>
       </ul>
       <Input className="text-lg sm:max-w-[40ch]" placeholder="Søk..." />

@@ -79,3 +79,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+#article p {
+  @apply my-4;
+}
+
+#article strong {
+  @apply text-xl;
+}

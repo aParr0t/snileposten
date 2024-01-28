@@ -1,3 +1,4 @@
+import Articles from "@/app/artikler/page";
 import { readItems, createDirectus, rest, readFile } from "@directus/sdk";
 
 const baseUrl = "http://localhost:8055";
@@ -59,17 +60,46 @@ function partyReducer(party: any) {
     description: party.beskrivelse,
     leader: party.partileder,
     name: party.partinavn,
-    logo: party.partilogo,
-    portrait: party.portrett,
+    logo: getImage(party.partilogo),
+    portrait: getImage(party.portrett),
     quote: party.quote,
     color: party.farge,
   };
 }
 
-export async function getImage(id: string) {
+export function getImage(id: string) {
   const imageUrl = `${baseUrl}/assets/${id}`;
   return imageUrl;
-  const result = await directus.request(readFile(id));
-  console.log(result);
-  return result.data;
+}
+
+export async function getArticles() {
+  const fetchedArticles = await directus.request(
+    readItems("artikler", {
+      sort: "-date_created",
+    })
+  );
+  return fetchedArticles.map(articleReducer);
+}
+
+export const articleReducer = (article: any) => ({
+  id: article.id,
+  title: article.tittel,
+  content: article.innhold,
+  thumbnail: getImage(article.thumbnail),
+  date: article.date_created,
+  status: article.status,
+  categories: article.kategori,
+});
+
+export async function getArticle(name: string) {
+  const fetchedArticles = await directus.request(
+    readItems("artikler", {
+      filter: {
+        tittel: {
+          _eq: name,
+        },
+      },
+    })
+  );
+  return fetchedArticles.map(articleReducer)[0];
 }
