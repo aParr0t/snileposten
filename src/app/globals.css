@@ -81,7 +81,7 @@
 }
 
 #article p {
-  @apply my-4;
+  @apply my-4 text-lg;
 }
 
 #article strong {

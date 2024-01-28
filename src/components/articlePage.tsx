@@ -48,7 +48,7 @@ export default function ArticlePage({
   const bigArticle = articles[0];
   return (
     <div className="flex flex-col place-items-center mx-auto p-3 gap-8 max-w-wideProse">
-      <ul className="flex flex-row gap-3">
+      <ul className="flex flex-row gap-3 flex-wrap">
         {categories.map((category) => {
           const bg =
             selectedCategory === category ? "bg-primary" : "bg-secondary";
@@ -65,7 +65,7 @@ export default function ArticlePage({
           );
         })}
       </ul>
-      <div className="flex flex-row gap-20">
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-20">
         <Link href={`/artikler/${bigArticle.title}`}>
           <div>
             <div className="pl-2 mb-6">

@@ -20,9 +20,9 @@ export default async function Parties({
         <Image
           src={portrait}
           alt="partileder"
-          width={300}
-          height={300}
-          className="aspect-auto w-full"
+          width={600}
+          height={600}
+          className="aspect-auto w-full h-auto"
           priority
         />
         <div className="text-white px-6 py-2 mt-10">

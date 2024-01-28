@@ -20,27 +20,43 @@ export default async function Navbar() {
     "py-4 px-4 inline transition-colors font-medium text-lg text-secondary hover:bg-secondary hover:text-primary";
   const bigArticle = articles[0];
   return (
-    <nav className="bg-primary w-full px-2 flex flex-row items-center gap-8">
+    <nav className="bg-primary w-full px-2 flex flex-row items-center gap-8 py-2 lg:py-0">
       <Sheet>
         <SheetTrigger className="text-secondary">
           <IoMenu size={36} />
         </SheetTrigger>
         <SheetContent side="left" className="bg-secondary-light">
           <SheetHeader>
-            <SheetTitle className="text-tertiary text-3xl py-6 text-center">
-              Siste nytt
-            </SheetTitle>
             <div>
+              <ul className="flex-col flex gap-4 lg:hidden text-xl text-start">
+                <li>
+                  <Link href="/program">Program</Link>
+                </li>
+                <li>
+                  <Link href="/partier">Parti og Ledere</Link>
+                </li>
+                <li>
+                  <Link href="/artikler">Artikler</Link>
+                </li>
+                <li>
+                  <Link href="/om-oss">Om oss</Link>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <SheetTitle className="text-tertiary text-3xl py-6 text-center">
+                Siste nytt
+              </SheetTitle>
               {articles.slice(1).map((article) => (
                 <Link key={article.id} href={`/artikler/${article.title}`}>
-                  <div className="border-t-2 border-tertiary py-4">
+                  <div className="border-t-2 border-tertiary py-4 text-start">
                     <p className="">{formatDateddmmyy(article.date)}</p>
                     <p className="text-lg">{article.title}</p>
                   </div>
                 </Link>
               ))}
               <Link href={`/artikler/${bigArticle.title}`}>
-                <div className="border-t-2 border-tertiary">
+                <div className="border-t-2 border-tertiary text-start pt-4">
                   <p className="">{formatDateddmmyy(bigArticle.date)}</p>
                   <p className="text-lg">{bigArticle.title}</p>
                   <Image
@@ -56,7 +72,7 @@ export default async function Navbar() {
           </SheetHeader>
         </SheetContent>
       </Sheet>
-      <ul className="flex flex-row">
+      <ul className="flex-row hidden md:flex whitespace-nowrap">
         <li className="flex">
           <Link href="/program" className={itemClass}>
             Program
@@ -96,7 +112,7 @@ export default async function Navbar() {
           </Link>
         </li>
       </ul>
-      <Input className="text-lg sm:max-w-[40ch]" placeholder="Søk..." />
+      {/* <Input className="text-lg sm:max-w-[40ch] w-fit" placeholder="Søk..." /> */}
     </nav>
   );
 }

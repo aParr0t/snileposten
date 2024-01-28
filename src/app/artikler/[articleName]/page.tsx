@@ -20,8 +20,10 @@ export default async function Article({
         className="w-full mb-4"
         priority
       />
-      <h1 className="text-5xl font-serif font-semibold">{article.title}</h1>
-      <div className="" id="article">
+      <div className="px-2" id="article">
+        <h1 className="text-3xl lg:text-5xl font-serif font-semibold">
+          {article.title}
+        </h1>
         {parse(article.content)}
       </div>
     </div>

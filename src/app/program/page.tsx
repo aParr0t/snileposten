@@ -1,7 +1,7 @@
 import { getProgram } from "@/lib/directus";
 import Image from "next/image";
 
-import dummy1 from "/public/static/images/dummy articles/stor artikkel.png";
+import dummy1 from "/public/static/images/hero.png";
 
 export default async function Program() {
   const fetchedProgram = await getProgram();
@@ -9,26 +9,32 @@ export default async function Program() {
   const start = formatDate(fetchedProgram[0].time);
   const end = formatDate(fetchedProgram[fetchedProgram.length - 1].time);
 
-  const leftWidth = "min-w-[20vw]";
+  const leftWidth = "min-w-[25vw]";
+  const afterClass = "after:right-0 after:translate-x-[50%] after:bg-black";
 
   return (
     <div className="absolute h-full w-full overflow-y-hidden flex flex-row items-stretch">
-      <div className="flex flex-col h-full">
+      <div className="flex flex-col h-full font-serif">
         <div className="flex flex-row text-xl">
           <span
-            className={`relative bg-secondary-light ${leftWidth} text-right text-primary pr-14 pt-4   after:absolute after:w-[40px] after:h-[8px] after:bottom-0 after:right-0 after:translate-x-[50%] after:bg-primary`}
+            className={`relative bg-secondary-light ${leftWidth} text-right font-semibold text-black pr-2 md:pr-14 pt-4   after:absolute after:w-[40px] after:h-[8px] after:bottom-0 ${afterClass}`}
           >
-            {/* Start */}
+            Start
           </span>
-          <span className="font-bold max-w-[50ch] mb-4 pl-6 pt-4">{start}</span>
+          <span className="font-semibold max-w-[50ch] mb-4 pl-6 pt-4">
+            {start}
+          </span>
         </div>
-        <ul className="">
-          {program.map((item, idx) => {
+        <ul>
+          {program.map((item) => {
             let { time, description } = item;
             return (
-              <li key={item.id} className="flex flex-row">
+              <li
+                key={item.id}
+                className="flex flex-row text-base lg:text-base"
+              >
                 <span
-                  className={`relative bg-secondary-light ${leftWidth} text-right text-primary pr-6 after:absolute after:w-[8px] after:h-full after:bottom-0 after:right-0 after:translate-x-[50%] after:bg-primary`}
+                  className={`relative bg-secondary-light ${leftWidth} text-right text-black pr-6 after:absolute after:w-[8px] after:h-full after:bottom-0 ${afterClass}`}
                 >
                   {formatDate(time)}
                 </span>
@@ -39,27 +45,29 @@ export default async function Program() {
         </ul>
         <div className="flex flex-row h-full text-xl">
           <span
-            className={`relative pt-4 bg-secondary-light ${leftWidth} text-right text-primary pr-14 after:absolute after:w-[40px] after:h-[8px] after:top-0 after:right-0 after:translate-x-[50%] after:bg-primary`}
+            className={`relative pt-4 bg-secondary-light ${leftWidth} text-right font-semibold text-black pr-2 md:pr-14 after:absolute after:w-[40px] after:h-[8px] after:top-0 ${afterClass}`}
           >
-            {/* Slutt */}
+            Slutt
           </span>
-          <span className="font-bold max-w-[50ch] mb-4 pl-6 pt-4">{end}</span>
+          <span className="font-semibold max-w-[50ch] mb-4 pl-6 pt-4">
+            {end}
+          </span>
         </div>
       </div>
       <div className="flex-col p-10 gap-8 hidden md:flex">
         <Image
           src={dummy1}
           alt="random bilde"
-          width={220}
-          height={220}
-          className="rounded-full aspect-square"
+          width={600}
+          height={600}
+          className="w-[220px] rounded-full aspect-square object-cover"
         />
         <Image
           src={dummy1}
           alt="random bilde"
-          width={150}
-          height={150}
-          className="rounded-full aspect-square ml-[50px] lg:ml-[150px]"
+          width={400}
+          height={400}
+          className="w-[150px] rounded-full aspect-square object-cover ml-[50px] lg:ml-[150px]"
         />
       </div>
     </div>

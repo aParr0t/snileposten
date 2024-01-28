@@ -6,8 +6,8 @@ export default function About() {
   return (
     <div className="flex flex-col justify-center text-primary p-8 max-w-wideProse mx-auto">
       <h1 className="text-4xl text-center">Om oss:</h1>
-      <div className="flex flex-row gap-6 bg-secondary rounded-lg p-3 mt-4">
-        <p className="">
+      <div className="flex flex-col lg:flex-row gap-6 bg-secondary rounded-lg p-3 mt-4 items-center">
+        <p className="text-lg lg:text-base">
           Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsa at
           vitae nemo rerum dicta obcaecati iste. Nobis eos sint eaque quidem
           ullam quos sit quaerat. Illo, assumenda nam vel provident ut veniam
