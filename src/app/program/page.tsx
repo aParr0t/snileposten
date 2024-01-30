@@ -13,8 +13,8 @@ export default async function Program() {
   const afterClass = "after:right-0 after:translate-x-[50%] after:bg-black";
 
   return (
-    <div className="absolute h-full w-full overflow-y-hidden flex flex-row items-stretch">
-      <div className="flex flex-col h-full font-serif">
+    <div className="h-full w-full overflow-y-hidden flex flex-row items-stretch">
+      <div className="flex flex-col h-full font-serif justify-stretch">
         <div className="flex flex-row text-xl">
           <span
             className={`relative bg-secondary-light ${leftWidth} text-right font-semibold text-black pr-2 md:pr-14 pt-4   after:absolute after:w-[40px] after:h-[8px] after:bottom-0 ${afterClass}`}
@@ -48,6 +48,7 @@ export default async function Program() {
             className={`relative pt-4 bg-secondary-light ${leftWidth} text-right font-semibold text-black pr-2 md:pr-14 after:absolute after:w-[40px] after:h-[8px] after:top-0 ${afterClass}`}
           >
             Slutt
+            <div className="absolute w-full bg-secondary-light h-screen"></div>
           </span>
           <span className="font-semibold max-w-[50ch] mb-4 pl-6 pt-4">
             {end}
