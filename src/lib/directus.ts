@@ -87,7 +87,7 @@ export const articleReducer = (article: any) => ({
   thumbnail: getImage(article.thumbnail),
   date: article.date_created,
   status: article.status,
-  categories: article.kategori,
+  categories: article.kategori as string[],
 });
 
 export async function getArticle(name: string) {
@@ -102,3 +102,15 @@ export async function getArticle(name: string) {
   );
   return fetchedArticles.map(articleReducer)[0];
 }
+
+export type Article = ReturnType<typeof articleReducer>;
+
+export async function getArticleCategories() {
+  const fertchedArticles = await getArticles();
+  // return all unique categories
+  return [
+    ...new Set(fertchedArticles.map((article) => article.categories).flat(1)),
+  ];
+}
+
+export type Category = string;
