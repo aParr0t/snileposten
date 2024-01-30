@@ -21,7 +21,7 @@ export default async function Navbar() {
   const linkClass = "py-4 px-4 inline font-medium text-lg self-center";
   const bigArticle = articles[0];
   return (
-    <nav className="bg-primary w-full px-2 flex flex-row items-center gap-8 py-2 lg:py-0">
+    <nav className="bg-primary w-full px-2 flex flex-row items-center gap-8 py-2 md:py-0">
       <Sheet>
         <SheetTrigger className="text-secondary">
           <IoMenu size={36} />
