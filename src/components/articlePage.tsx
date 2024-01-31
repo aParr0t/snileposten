@@ -51,7 +51,7 @@ export default function ArticlePage({
           <ArticlePreview
             article={article}
             key={article.id}
-            className="max-w-[45%]"
+            className="lg:max-w-[45%]"
           />
         ))}
       </div>
