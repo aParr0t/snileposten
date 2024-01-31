@@ -3,22 +3,17 @@
 import Image from "next/image";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { articleReducer } from "@/lib/directus";
+import { Category, Article } from "@/lib/directus";
 import { formatDateddmmyy } from "@/lib/date";
 import Link from "next/link";
-
-const categories = [
-  "Miljø",
-  "Arbeidsliv",
-  "Helse og omsorg",
-  "Næring og økonomi",
-  "Kultur",
-];
+import ArticlePreview from "@/components/ArticlePreview";
 
 export default function ArticlePage({
   articles,
+  categories,
 }: {
-  articles: ReturnType<typeof articleReducer>[];
+  articles: Article[];
+  categories: Category[];
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -45,28 +40,30 @@ export default function ArticlePage({
   }
 
   const selectedCategory = searchParams.get("category");
-  const bigArticle = articles[0];
-  return (
-    <div className="flex flex-col place-items-center mx-auto p-3 gap-8 max-w-wideProse">
-      <ul className="flex flex-row gap-3 flex-wrap">
-        {categories.map((category) => {
-          const bg =
-            selectedCategory === category ? "bg-primary" : "bg-secondary";
-          const textColor =
-            selectedCategory === category ? "text-secondary" : "text-primary";
-          return (
-            <li
-              className={`${bg} ${textColor} rounded-full py-1 px-4 hover:bg-primary hover:text-secondary transition-colors hover:cursor-pointer`}
-              key={category}
-              onClick={() => handleClick(category)}
-            >
-              {category}
-            </li>
-          );
-        })}
-      </ul>
-      <div className="flex flex-col lg:flex-row gap-8 lg:gap-20">
-        <Link href={`/artikler/${bigArticle.title}`}>
+  let articleSection;
+  if (selectedCategory) {
+    const filteredArticles = articles.filter((article) =>
+      article.categories.includes(selectedCategory)
+    );
+    articleSection = (
+      <div className="flex flex-row flex-wrap gap-4 place-content-center">
+        {filteredArticles.map((article) => (
+          <ArticlePreview
+            article={article}
+            key={article.id}
+            className="max-w-[45%]"
+          />
+        ))}
+      </div>
+    );
+  } else {
+    const bigArticle = articles[0];
+    articleSection = (
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 flex-1">
+        <Link
+          href={`/artikler/${bigArticle.title}`}
+          className="flex-grow basis-0"
+        >
           <div>
             <div className="pl-2 mb-6">
               <span className="block font-semibold text-sm capitalize">
@@ -84,36 +81,37 @@ export default function ArticlePage({
             />
           </div>
         </Link>
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 flex-grow basis-0">
           {articles.slice(1).map((article) => {
-            return (
-              <Link href={`/artikler/${article.title}`} key={article.id}>
-                <div
-                  key={article.id}
-                  className="flex flex-row gap-8 border-l-2 border-tertiary px-2"
-                >
-                  <div className="flex-grow basis-0 min-w-0">
-                    <span className="block font-semibold text-sm capitalize">
-                      {formatDateddmmyy(article.date)}
-                    </span>
-                    <h2 className="font-bold text-xl">{article.title}</h2>
-                    <span className="font-semibold text-sm capitalize">
-                      {article.categories}
-                    </span>
-                  </div>
-                  <Image
-                    src={article.thumbnail}
-                    alt={article.title}
-                    width={200}
-                    height={200}
-                    className="w-[200px] h-[150px] object-cover flex-grow basis-0 min-w-0"
-                  />
-                </div>
-              </Link>
-            );
+            return <ArticlePreview article={article} key={article.id} />;
           })}
         </div>
       </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col place-items-center mx-auto p-3 py-8 gap-8 max-w-wideProse">
+      <ul className="flex flex-row gap-3 flex-wrap">
+        {categories.map((category) => {
+          console.log(category);
+
+          const bg =
+            selectedCategory === category ? "bg-primary" : "bg-secondary";
+          const textColor =
+            selectedCategory === category ? "text-secondary" : "text-primary";
+          return (
+            <li
+              className={`${bg} ${textColor} rounded-full py-1 px-4 hover:bg-primary hover:text-secondary transition-colors hover:cursor-pointer`}
+              key={category}
+              onClick={() => handleClick(category)}
+            >
+              {category}
+            </li>
+          );
+        })}
+      </ul>
+      {articleSection}
     </div>
   );
 }

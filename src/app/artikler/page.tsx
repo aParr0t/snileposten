@@ -1,8 +1,9 @@
 import ArticlePage from "@/components/articlePage";
-import { getArticles } from "@/lib/directus";
+import { getArticleCategories, getArticles } from "@/lib/directus";
 
 export default async function Articles() {
   const articles = await getArticles();
+  const categories = await getArticleCategories();
 
-  return <ArticlePage articles={articles} />;
+  return <ArticlePage articles={articles} categories={categories} />;
 }

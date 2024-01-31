@@ -17,10 +17,11 @@ export default async function Navbar() {
   const articles = await getArticles();
 
   const itemClass =
-    "py-4 px-4 inline transition-colors font-medium text-lg text-secondary hover:bg-secondary hover:text-primary";
+    "flex transition-colors hover:bg-secondary hover:text-primary text-secondary";
+  const linkClass = "py-4 px-4 inline font-medium text-lg self-center";
   const bigArticle = articles[0];
   return (
-    <nav className="bg-primary w-full px-2 flex flex-row items-center gap-8 py-2 lg:py-0">
+    <nav className="bg-primary w-full px-2 flex flex-row items-center gap-8 py-2 md:py-0">
       <Sheet>
         <SheetTrigger className="text-secondary">
           <IoMenu size={36} />
@@ -29,6 +30,11 @@ export default async function Navbar() {
           <SheetHeader>
             <div>
               <ul className="flex-col flex gap-4 lg:hidden text-xl text-start">
+                <li>
+                  <Link href="/" className="font-serif">
+                    LILLENYTT
+                  </Link>
+                </li>
                 <li>
                   <Link href="/program">Program</Link>
                 </li>
@@ -73,16 +79,18 @@ export default async function Navbar() {
         </SheetContent>
       </Sheet>
       <ul className="flex-row hidden md:flex whitespace-nowrap">
-        <li className="flex">
-          <Link href="/program" className={itemClass}>
+        <li className={`${itemClass}`}>
+          <Link href="/" className={`${linkClass} font-serif !text-3xl`}>
+            LILLENYTT
+          </Link>
+        </li>
+        <li className={`${itemClass}`}>
+          <Link href="/program" className={linkClass}>
             Program
           </Link>
         </li>
-        <li className="relative flex group/drop">
-          <Link
-            href="/partier"
-            className="py-4 px-4 inline transition-colors font-medium text-lg text-secondary group-hover/drop:bg-secondary group-hover/drop:text-primary"
-          >
+        <li className={`${itemClass} relative group/drop`}>
+          <Link href="/partier" className={linkClass}>
             Parti og Ledere
           </Link>
           <ul className="absolute top-full left-0 w-full z-10 bg-secondary hidden group-hover/drop:inline">
@@ -101,13 +109,13 @@ export default async function Navbar() {
             ))}
           </ul>
         </li>
-        <li className="flex">
-          <Link href="/artikler" className={itemClass}>
+        <li className={`${itemClass}`}>
+          <Link href="/artikler" className={linkClass}>
             Artikler
           </Link>
         </li>
-        <li className="flex">
-          <Link href="/om-oss" className={itemClass}>
+        <li className={`${itemClass}`}>
+          <Link href="/om-oss" className={linkClass}>
             Om oss
           </Link>
         </li>
