@@ -13,7 +13,7 @@ export default async function Parties({
     await getParty(partyName);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[350px_auto] mx-auto grid-rows-2 max-w-[100ch]">
+    <div className="grid grid-cols-1 md:grid-cols-[350px_auto] mx-auto md:grid-rows-2 max-w-[100ch]">
       {/* Image cache invalidation taken from: https://stackoverflow.com/a/76384689 */}
       <div className="py-12 relative justify-center flex">
         <div
@@ -28,7 +28,7 @@ export default async function Parties({
           className="w-full max-w-[350px] z-30 relative"
         />
       </div>
-      <div className="flex flex-col items-center self-center">
+      <div className="flex flex-col items-center self-center p-8">
         <Image
           src={logo}
           alt="partilogo"
