@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { getParty, getPartyNames } from "@/lib/directus";
+import VideoPlayer from "@/components/VideoPlayer";
 
 export default async function Parties({
   params,
@@ -8,29 +9,26 @@ export default async function Parties({
   params: { partyName: string };
 }) {
   const partyName = decodeURIComponent(params.partyName);
-  const { quote, leader, description, name, color, portrait, logo } =
+  const { quote, leader, description, name, color, portrait, logo, video, id } =
     await getParty(partyName);
 
   return (
-    <div className="flex flex-row mx-auto px-8 gap-6">
-      <div
-        className="flex flex-col py-12 w-[35ch]"
-        style={{ backgroundColor: color }}
-      >
+    <div className="grid grid-cols-1 md:grid-cols-[350px_auto] mx-auto grid-rows-2 max-w-[100ch]">
+      {/* Image cache invalidation taken from: https://stackoverflow.com/a/76384689 */}
+      <div className="py-12 relative justify-center flex">
+        <div
+          className="absolute top-0 left-0 w-full h-full hidden md:block z-0"
+          style={{ backgroundColor: color }}
+        ></div>
         <Image
-          src={portrait}
+          src={`${portrait}?${id}`}
           alt="partileder"
           width={600}
           height={600}
-          className="aspect-auto w-full h-auto"
-          priority
+          className="w-full max-w-[350px] z-30 relative"
         />
-        <div className="text-white px-6 py-2 mt-10">
-          <h3 className="text-xl mb-4">Partiets hjertesaker</h3>
-          <p>{description}</p>
-        </div>
       </div>
-      <div className="flex flex-col items-center pt-20">
+      <div className="flex flex-col items-center self-center">
         <Image
           src={logo}
           alt="partilogo"
@@ -47,29 +45,26 @@ export default async function Parties({
           &quot;{quote}&quot;
         </span>
       </div>
+      <div className="text-white px-6 py-2" style={{ backgroundColor: color }}>
+        <h3 className="text-xl mb-4">Partiets hjertesaker</h3>
+        <p>{description}</p>
+      </div>
+      <div className="hidden md:block p-4">
+        {video && (
+          <VideoPlayer
+            src={video}
+            className="border-y-8 py-2 max-w-full"
+            style={{ borderColor: color }}
+          />
+        )}
+      </div>
+      <div
+        className="p-4 flex md:hidden justify-center"
+        style={{ backgroundColor: color }}
+      >
+        {video && <VideoPlayer src={video} className="py-2 max-w-full" />}
+      </div>
     </div>
-    // old design vvv
-    // <div className="flex flex-col sm:flex-row font-serif mx-auto p-8 gap-10">
-    //   <div>
-    //     <div className="pl-4 mb-6">
-    //       <h1 className="text-3xl text-primary mb-4">{name} ()</h1>
-    //       <span>Leder: {leader}</span>
-    //     </div>
-    //     <div className="bg-secondary w-fit flex flex-col justify-center rounded-xl p-4">
-    //       <span className="text-center text-2xl font-semibold">Info</span>
-    //       <p className="max-w-[40ch]">{description}</p>
-    //     </div>
-    //   </div>
-    //   <div className="flex flex-col max-w-[25ch] justify-stretch">
-    //     <div className="flex place-content-center px-14 py-10 border-[20px] border-primary rounded-full w-full">
-    //       <Image src={Partyleader} alt="Partileder" width={100} />
-    //     </div>
-    //     <span className="px-4">
-    //       <span className="text-primary text-xl font-semibold">Quote:</span>{" "}
-    //       {quote}
-    //     </span>
-    //   </div>
-    // </div>
   );
 }
 
