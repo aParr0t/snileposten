@@ -6,7 +6,7 @@ import Program2 from "/public/static/images/program 2.jpg";
 
 export default async function Program() {
   const fetchedProgram = await getProgram();
-  const program = fetchedProgram.slice(1, fetchedProgram.length - 1);
+  const program = fetchedProgram.slice(0, fetchedProgram.length - 0);
   const start = formatDate(fetchedProgram[0].time);
   const end = formatDate(fetchedProgram[fetchedProgram.length - 1].time);
 
