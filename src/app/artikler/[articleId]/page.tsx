@@ -5,10 +5,11 @@ import Image from "next/image";
 export default async function Article({
   params,
 }: {
-  params: { articleName: string };
+  params: { articleId: number };
 }) {
-  const articleName = decodeURIComponent(params.articleName);
-  const article = await getArticle(articleName);
+  console.log(params.articleId);
+  const article = await getArticle(params.articleId);
+  console.log(article);
 
   return (
     <div className="max-w-prose mx-auto flex flex-col py-8">

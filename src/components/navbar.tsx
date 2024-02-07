@@ -54,14 +54,14 @@ export default async function Navbar() {
                 Siste nytt
               </SheetTitle>
               {articles.slice(1).map((article) => (
-                <Link key={article.id} href={`/artikler/${article.title}`}>
+                <Link key={article.id} href={`/artikler/${article.id}`}>
                   <div className="border-t-2 border-tertiary py-4 text-start">
                     <p className="">{formatDateddmmyy(article.date)}</p>
                     <p className="text-lg">{article.title}</p>
                   </div>
                 </Link>
               ))}
-              <Link href={`/artikler/${bigArticle.title}`}>
+              <Link href={`/artikler/${bigArticle.id}`}>
                 <div className="border-t-2 border-tertiary text-start pt-4">
                   <p className="">{formatDateddmmyy(bigArticle.date)}</p>
                   <p className="text-lg">{bigArticle.title}</p>

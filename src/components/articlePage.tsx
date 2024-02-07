@@ -60,10 +60,7 @@ export default function ArticlePage({
     const bigArticle = articles[0];
     articleSection = (
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 flex-1">
-        <Link
-          href={`/artikler/${bigArticle.title}`}
-          className="flex-grow basis-0"
-        >
+        <Link href={`/artikler/${bigArticle.id}`} className="flex-grow basis-0">
           <div>
             <div className="pl-2 mb-6">
               <span className="block font-semibold text-sm capitalize">
@@ -94,8 +91,6 @@ export default function ArticlePage({
     <div className="flex flex-col place-items-center mx-auto p-3 py-8 gap-8 max-w-wideProse">
       <ul className="flex flex-row gap-3 flex-wrap">
         {categories.map((category) => {
-          console.log(category);
-
           const bg =
             selectedCategory === category ? "bg-primary" : "bg-secondary";
           const textColor =
