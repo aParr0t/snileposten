@@ -46,12 +46,12 @@ export default function ArticlePage({
       article.categories.includes(selectedCategory)
     );
     articleSection = (
-      <div className="flex flex-row flex-wrap gap-4 place-content-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 place-content-center">
         {filteredArticles.map((article) => (
           <ArticlePreview
             article={article}
             key={article.id}
-            className="lg:max-w-[45%]"
+            className="lg:max-w-[45%] min-w-[300px]"
           />
         ))}
       </div>
@@ -60,10 +60,7 @@ export default function ArticlePage({
     const bigArticle = articles[0];
     articleSection = (
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-20 flex-1">
-        <Link
-          href={`/artikler/${bigArticle.title}`}
-          className="flex-grow basis-0"
-        >
+        <Link href={`/artikler/${bigArticle.id}`} className="flex-grow basis-0">
           <div>
             <div className="pl-2 mb-6">
               <span className="block font-semibold text-sm capitalize">
@@ -82,9 +79,11 @@ export default function ArticlePage({
           </div>
         </Link>
         <div className="flex flex-col gap-2 flex-grow basis-0">
-          {articles.slice(1).map((article) => {
-            return <ArticlePreview article={article} key={article.id} />;
-          })}
+          {articles
+            .slice(1, Math.min(articles.length, 1 + 3))
+            .map((article) => {
+              return <ArticlePreview article={article} key={article.id} />;
+            })}
         </div>
       </div>
     );
@@ -94,8 +93,6 @@ export default function ArticlePage({
     <div className="flex flex-col place-items-center mx-auto p-3 py-8 gap-8 max-w-wideProse">
       <ul className="flex flex-row gap-3 flex-wrap">
         {categories.map((category) => {
-          console.log(category);
-
           const bg =
             selectedCategory === category ? "bg-primary" : "bg-secondary";
           const textColor =

@@ -12,7 +12,7 @@ export default function ArticlePreview({
 }) {
   return (
     <Link
-      href={`/artikler/${article.title}`}
+      href={`/artikler/${article.id}`}
       key={article.id}
       className={`${className}`}
     >

@@ -1,17 +1,19 @@
 import { getProgram } from "@/lib/directus";
 import Image from "next/image";
 
-import dummy1 from "/public/static/images/hero.png";
+import Program1 from "/public/static/images/program 1.jpg";
+import Program2 from "/public/static/images/program 2.jpg";
 
 export default async function Program() {
   const fetchedProgram = await getProgram();
-  const program = fetchedProgram.slice(1, fetchedProgram.length - 1);
+  const program = fetchedProgram.slice(0, fetchedProgram.length - 0);
   const start = formatDate(fetchedProgram[0].time);
   const end = formatDate(fetchedProgram[fetchedProgram.length - 1].time);
 
   const leftWidth = "min-w-[25vw]";
   const afterClass = "after:right-0 after:translate-x-[50%] after:bg-black";
 
+  const imageClass = "rounded-full aspect-square object-cover";
   return (
     <div className="h-full w-full overflow-y-hidden flex flex-row items-stretch">
       <div className="flex flex-col h-full font-serif justify-stretch">
@@ -57,18 +59,18 @@ export default async function Program() {
       </div>
       <div className="flex-col p-10 gap-8 hidden md:flex">
         <Image
-          src={dummy1}
-          alt="random bilde"
+          src={Program1}
+          alt="production crew"
           width={600}
           height={600}
-          className="w-[220px] rounded-full aspect-square object-cover"
+          className={`${imageClass} w-[220px]`}
         />
         <Image
-          src={dummy1}
-          alt="random bilde"
+          src={Program2}
+          alt="production crew"
           width={400}
           height={400}
-          className="w-[150px] rounded-full aspect-square object-cover ml-[50px] lg:ml-[150px]"
+          className={`${imageClass} w-[150px] ml-[50px] lg:ml-[150px]`}
         />
       </div>
     </div>

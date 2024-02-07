@@ -63,6 +63,7 @@ function partyReducer(party: any) {
     portrait: getImage(party.portrett),
     quote: party.quote,
     color: party.farge,
+    video: party.videointervju ? getImage(party.videointervju) : null,
   };
 }
 
@@ -90,12 +91,12 @@ export const articleReducer = (article: any) => ({
   categories: article.kategori as string[],
 });
 
-export async function getArticle(name: string) {
+export async function getArticle(id: number) {
   const fetchedArticles = await directus.request(
     readItems("artikler", {
       filter: {
-        tittel: {
-          _eq: name,
+        id: {
+          _eq: id,
         },
       },
     })
