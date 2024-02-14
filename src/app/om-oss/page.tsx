@@ -10,7 +10,7 @@ export default function About() {
         <p className="text-lg lg:text-base">
           Lillestortinget ble formet av annet Sigurd Sætre i 2014. Siden den
           gang har det foregått her på Lillestrøm VGS hvert år. I år starter vi
-          opp 13. mars og holder det gående i rundt to uker. Lillestrotinget er
+          opp 12. mars og holder det gående i rundt to uker. Lillestrotinget er
           et politisk rollespill der alle elever på vg1 ST, 2MK, og 2MD deltar.
           Vi har også inkludert flere elever fra ulike klassetrinn, samt
           deltakere fra politikk- og menneskerettighetsklassen. Noen av

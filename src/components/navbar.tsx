@@ -93,7 +93,7 @@ export default async function Navbar() {
           <Link href="/partier" className={linkClass}>
             Parti og Ledere
           </Link>
-          <ul className="absolute top-full left-0 w-full z-10 bg-secondary hidden group-hover/drop:inline">
+          <ul className="absolute top-full left-0 w-full z-50 bg-secondary hidden group-hover/drop:inline">
             {parties.map((party) => (
               <li
                 key={party.id}

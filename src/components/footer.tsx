@@ -1,13 +1,11 @@
 export default function Footer() {
-  const year = new Date().getFullYear();
-
   return (
     <footer className="bg-primary p-8 flex flex-row justify-center">
       <div className="flex flex-col">
         <h2 className="text-2xl text-secondary">Kontakt oss</h2>
         <div className="flex flex-col md:flex-row text-white gap-8">
           <div>
-            <h3 className="text-secondary">Lillestortig Ansvarlig</h3>
+            <h3 className="text-secondary">Lillestorting Ansvarlig</h3>
             <p>Dagfinn Tvedt</p>
             <a href="tel:99544975" className="block">
               Tlf: 99 54 49 75
