@@ -68,7 +68,7 @@ export default function Home() {
             Lillestrøm videregående arangerer stolt Lillestortinget for det
             tiende året på rad! Lillestortinget er en tradisjon som har som mål
             å øke elevens engasjement innenfor politikk. Les mer om
-            lillestortinger{" "}
+            lillestortinget{" "}
             <Link href="/om-oss" className="text-primary underline">
               her.
             </Link>
