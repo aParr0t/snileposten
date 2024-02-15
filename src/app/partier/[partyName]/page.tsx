@@ -62,7 +62,9 @@ export default async function Parties({
         className="p-4 flex md:hidden justify-center"
         style={{ backgroundColor: color }}
       >
-        {video && <VideoPlayer src={video} className="py-2 max-w-full" />}
+        {video && (
+          <VideoPlayer src={`${video}?${id}`} className="py-2 max-w-full" />
+        )}
       </div>
     </div>
   );
