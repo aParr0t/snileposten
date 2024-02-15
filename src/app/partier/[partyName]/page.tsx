@@ -12,6 +12,8 @@ export default async function Parties({
   const { quote, leader, description, name, color, portrait, logo, video, id } =
     await getParty(partyName);
 
+  const timeStamp = new Date().getTime();
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-[350px_auto] mx-auto md:grid-rows-2 max-w-[100ch]">
       {/* Image cache invalidation taken from: https://stackoverflow.com/a/76384689 */}
@@ -21,7 +23,7 @@ export default async function Parties({
           style={{ backgroundColor: color }}
         ></div>
         <Image
-          src={`${portrait}?${id}`}
+          src={`${portrait}?${timeStamp}`}
           alt="partileder"
           width={600}
           height={600}
@@ -63,7 +65,10 @@ export default async function Parties({
         style={{ backgroundColor: color }}
       >
         {video && (
-          <VideoPlayer src={`${video}?${id}`} className="py-2 max-w-full" />
+          <VideoPlayer
+            src={`${video}?${timeStamp}`}
+            className="py-2 max-w-full"
+          />
         )}
       </div>
     </div>
