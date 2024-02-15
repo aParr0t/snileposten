@@ -54,6 +54,7 @@ export async function getParty(name: string) {
 }
 
 function partyReducer(party: any) {
+  console.log(party);
   return {
     id: party.id,
     description: party.beskrivelse,
@@ -63,7 +64,7 @@ function partyReducer(party: any) {
     portrait: getImage(party.portrett),
     quote: party.quote,
     color: party.farge,
-    video: party.videointervju ? getImage(party.videointervju) : null,
+    video: party.videointervju,
   };
 }
 
