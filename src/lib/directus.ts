@@ -124,3 +124,23 @@ export async function getArticleCategories() {
 }
 
 export type Category = string;
+
+export async function getGovernment() {
+  const fetchedGovernment = await directus.request(
+    readItems("regjering", {
+      fields: ["navn", "id", "rolle", "departement", "portrett"],
+    })
+  );
+
+  return fetchedGovernment.map(governmentReducer);
+}
+
+function governmentReducer(item: any) {
+  return {
+    id: item.id,
+    name: item.navn,
+    role: item.rolle,
+    department: item.departement,
+    portrait: getImage(item.portrett),
+  };
+}
