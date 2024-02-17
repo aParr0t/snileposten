@@ -6,7 +6,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { IoMenu } from "react-icons/io5";
-import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { getArticles, getPartyNames } from "@/lib/directus";
 import { formatDateddmmyy } from "@/lib/date";
@@ -26,7 +25,10 @@ export default async function Navbar() {
         <SheetTrigger className="text-secondary">
           <IoMenu size={36} />
         </SheetTrigger>
-        <SheetContent side="left" className="bg-secondary-light">
+        <SheetContent
+          side="left"
+          className="bg-secondary-light overflow-scroll"
+        >
           <SheetHeader>
             <div>
               <ul className="flex-col flex gap-4 lg:hidden text-xl text-start">
@@ -46,6 +48,9 @@ export default async function Navbar() {
                 </li>
                 <li>
                   <Link href="/om-oss">Om oss</Link>
+                </li>
+                <li>
+                  <Link href="/regjering">Regjering</Link>
                 </li>
               </ul>
             </div>
@@ -119,8 +124,12 @@ export default async function Navbar() {
             Om oss
           </Link>
         </li>
+        <li className={`${itemClass}`}>
+          <Link href="/regjering" className={linkClass}>
+            Regjering
+          </Link>
+        </li>
       </ul>
-      {/* <Input className="text-lg sm:max-w-[40ch] w-fit" placeholder="Søk..." /> */}
     </nav>
   );
 }

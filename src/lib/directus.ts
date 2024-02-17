@@ -8,17 +8,26 @@ export default directus;
 export async function getProgram() {
   const fetchedProgram = await directus.request(
     readItems("program", {
-      fields: ["tid", "hendelse", "id"],
-      sort: "tid",
+      fields: ["navn", "hendelser", "id"],
+      sort: "dag",
     })
   );
 
-  return fetchedProgram.map((item) => ({
-    id: item.id,
-    time: new Date(item.tid),
-    description: item.hendelse,
-  }));
+  return fetchedProgram.map(programReducer);
 }
+
+function programReducer(item: any) {
+  return {
+    id: item.id,
+    name: item.navn,
+    events: item.hendelser.map((event: any) => ({
+      time: event.tid,
+      event: event.hendelse,
+    })),
+  };
+}
+
+export type Program = ReturnType<typeof programReducer>;
 
 export async function getPartyNames() {
   const fetchedParties = await directus.request(
@@ -63,7 +72,7 @@ function partyReducer(party: any) {
     portrait: getImage(party.portrett),
     quote: party.quote,
     color: party.farge,
-    video: party.videointervju ? getImage(party.videointervju) : null,
+    video: party.videointervju,
   };
 }
 
@@ -115,3 +124,23 @@ export async function getArticleCategories() {
 }
 
 export type Category = string;
+
+export async function getGovernment() {
+  const fetchedGovernment = await directus.request(
+    readItems("regjering", {
+      fields: ["navn", "id", "rolle", "departement", "portrett"],
+    })
+  );
+
+  return fetchedGovernment.map(governmentReducer);
+}
+
+function governmentReducer(item: any) {
+  return {
+    id: item.id,
+    name: item.navn,
+    role: item.rolle,
+    department: item.departement,
+    portrait: getImage(item.portrett),
+  };
+}
