@@ -26,7 +26,10 @@ export default async function Navbar() {
         <SheetTrigger className="text-secondary">
           <IoMenu size={36} />
         </SheetTrigger>
-        <SheetContent side="left" className="bg-secondary-light">
+        <SheetContent
+          side="left"
+          className="bg-secondary-light overflow-scroll"
+        >
           <SheetHeader>
             <div>
               <ul className="flex-col flex gap-4 lg:hidden text-xl text-start">
