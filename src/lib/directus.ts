@@ -16,11 +16,11 @@ export async function getProgram() {
   return fetchedProgram.map(programReducer);
 }
 
-function programReducer(item) {
+function programReducer(item: any) {
   return {
     id: item.id,
     name: item.navn,
-    events: item.hendelser.map((event) => ({
+    events: item.hendelser.map((event: any) => ({
       time: event.tid,
       event: event.hendelse,
     })),
