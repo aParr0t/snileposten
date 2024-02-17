@@ -19,7 +19,7 @@ type item = {
   event: string;
 };
 function Timeline({ name, items }: { name: string; items: item[] }) {
-  const leftWidth = "min-w-[25vw] max-w-[25vw]";
+  const leftWidth = "min-w-[25vw] max-w-[25vw] md:min-w-[15vw] md:max-w-[15vw]";
 
   const borderClass = "border-r-[8px] border-primary";
 
