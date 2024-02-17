@@ -6,8 +6,6 @@ export const revalidate = 120;
 export default async function Government() {
   const government = await getGovernment();
 
-  console.log(government);
-
   return (
     <div className="mx-auto py-4 px-4">
       <div className="grid grid-cols-1 md:grid-cols-2 relative">
