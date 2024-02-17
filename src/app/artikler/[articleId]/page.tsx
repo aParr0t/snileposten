@@ -2,14 +2,14 @@ import { getArticle } from "@/lib/directus";
 import parse from "html-react-parser";
 import Image from "next/image";
 
+export const revalidate = 120;
+
 export default async function Article({
   params,
 }: {
   params: { articleId: number };
 }) {
-  console.log(params.articleId);
   const article = await getArticle(params.articleId);
-  console.log(article);
 
   return (
     <div className="max-w-prose mx-auto flex flex-col py-8">

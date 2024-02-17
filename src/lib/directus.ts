@@ -8,17 +8,26 @@ export default directus;
 export async function getProgram() {
   const fetchedProgram = await directus.request(
     readItems("program", {
-      fields: ["tid", "hendelse", "id"],
-      sort: "tid",
+      fields: ["navn", "hendelser", "id"],
+      sort: "dag",
     })
   );
 
-  return fetchedProgram.map((item) => ({
-    id: item.id,
-    time: new Date(item.tid),
-    description: item.hendelse,
-  }));
+  return fetchedProgram.map(programReducer);
 }
+
+function programReducer(item) {
+  return {
+    id: item.id,
+    name: item.navn,
+    events: item.hendelser.map((event) => ({
+      time: event.tid,
+      event: event.hendelse,
+    })),
+  };
+}
+
+export type Program = ReturnType<typeof programReducer>;
 
 export async function getPartyNames() {
   const fetchedParties = await directus.request(
@@ -54,7 +63,6 @@ export async function getParty(name: string) {
 }
 
 function partyReducer(party: any) {
-  console.log(party);
   return {
     id: party.id,
     description: party.beskrivelse,

@@ -3,7 +3,9 @@ import Image from "next/image";
 import { getParty, getPartyNames } from "@/lib/directus";
 import VideoPlayer from "@/components/VideoPlayer";
 
-export default async function Parties({
+export const revalidate = 120;
+
+export default async function Party({
   params,
 }: {
   params: { partyName: string };
@@ -12,7 +14,7 @@ export default async function Parties({
   const { quote, leader, description, name, color, portrait, logo, video, id } =
     await getParty(partyName);
 
-  const timeStamp = new Date().getTime();
+  // const timeStamp = new Date().getTime();
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-[350px_auto] mx-auto md:grid-rows-2 max-w-[100ch]">
@@ -23,11 +25,13 @@ export default async function Parties({
           style={{ backgroundColor: color }}
         ></div>
         <Image
-          src={`${portrait}?${timeStamp}`}
+          // src={`${portrait}?${timeStamp}`}
+          src={portrait}
           alt="partileder"
           width={600}
           height={600}
           className="w-full max-w-[350px] z-30 relative"
+          sizes="50vw"
         />
       </div>
       <div className="flex flex-col items-center self-center p-8">
@@ -54,6 +58,7 @@ export default async function Parties({
       <div className="hidden md:block p-4">
         {video && (
           <VideoPlayer
+            // src={`${video}?${timeStamp}`}
             src={video}
             className="border-y-8 py-2 max-w-full"
             style={{ borderColor: color }}
@@ -66,7 +71,8 @@ export default async function Parties({
       >
         {video && (
           <VideoPlayer
-            src={`${video}?${timeStamp}`}
+            // src={`${video}?${timeStamp}`}
+            src={video}
             className="py-2 max-w-full"
           />
         )}

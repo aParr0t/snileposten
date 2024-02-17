@@ -8,6 +8,8 @@ import {
 import { getParties } from "@/lib/directus";
 import Link from "next/link";
 
+export const revalidate = 120;
+
 export default async function Parties() {
   const parties = await getParties();
 
