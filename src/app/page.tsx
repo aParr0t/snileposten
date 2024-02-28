@@ -1,5 +1,5 @@
 import Image from "next/image";
-import HeroImage from "/public/static/images/hero.png";
+import HeroImage from "/public/static/images/hero.jpg";
 import Logo from "/public/static/images/logo.svg";
 import AnniversaryImage from "/public/static/images/jubileum.svg";
 import GroupImage from "/public/static/images/gruppebilde.jpg";
